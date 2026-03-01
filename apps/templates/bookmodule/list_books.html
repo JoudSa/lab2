@@ -1,0 +1,15 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block title %} List of Books {% endblock title %}
+
+{% block content %}
+    <h1>List of Books</h1>
+    <a href="{% url 'books.view_one_book' bookId=1 %}">
+        <h2>1) Internet & World Wide Web How to Program</h2>
+    </a>
+    <img src="{% static 'book1.jpg' %}" alt="Book1" width="200" height="200">
+    <hr>
+    <h2>2) C++ How to Program</h2>
+    <img src="{% static 'book2.jpg' %}" alt="Book2" width="200" height="200">
+{% endblock content %}
