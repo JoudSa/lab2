@@ -1,0 +1,21 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% block title %} Task 1: Links and Layout {% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+{% endblock stylesheets %}
+
+{% block content %}
+    <div class="linkRow rowGreen">
+        <a href="https://www.qu.edu.sa" target="_blank">Go to QU website (open a new tab)</a>
+    </div>
+
+    <div class="linkRow rowGrey">
+        <a href="https://www.qu.edu.sa">Go to QU website (same tab)</a>
+    </div>
+
+    <div class="linkRow rowBlack">
+        <a href="https://www.qu.edu.sa">Go to QU website (same tab)</a>
+    </div>
+{% endblock %}

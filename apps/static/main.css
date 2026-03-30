@@ -1,0 +1,126 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* Task 1: Link Rows */
+.linkRow {
+    display: block;
+    padding: 20px 0;
+    text-align: center;
+    width: 100%;
+    margin: 0;
+    border: none;
+}
+
+.rowGreen { background-color: #b9fbc0; }
+.rowGrey { background-color: #555555; }
+.rowBlack { background-color: #000000; }
+
+/* 1. The Green Row */
+.rowGreen a:link { color: rgb(219, 3, 3); text-decoration: none; } 
+.rowGreen a:visited { color: #9f0000; } 
+.rowGreen a:hover { color: #000; text-decoration: underline; } 
+.rowGreen a:active { color: #fff; } 
+/* 2. The Grey Row */
+.rowGrey a:link { color: rgb(255, 217, 0); text-decoration: none; }
+.rowGrey a:visited { color: #b8860b; } 
+.rowGrey a:hover { color: #fff; text-decoration: underline; }
+.rowGrey a:active { color: #000; }
+/* 3. The Black Row */
+.rowBlack a:link { color: white; text-decoration: none; }
+.rowBlack a:visited { color: #939393; } /* Dark Grey */
+.rowBlack a:hover { color: #ffff00; text-decoration: underline; } /* Yellow hover */
+.rowBlack a:active { color: #ff0000; } /* Red click */
+
+/*  Task 2: Formatting */
+.formattingTitle {
+    background-color: #f5f5dc; 
+    color: #228b22;           
+    padding: 20px;
+    text-align: left;        
+    font-family: serif;
+    border-bottom: 1px solid #ddd;
+}
+
+.formattingContainer p {
+    margin: 5px 0;
+    font-family: Arial, sans-serif;
+    font-size: 1.1em;
+}
+
+mark {
+    background-color: yellow;
+    color: black;
+}
+
+/* Task 3: Listing */
+.listingContainer {
+    padding: 0;
+    margin: 0;
+}
+
+.listHeader {
+    background-color: #427380; 
+    color: white;              
+    padding: 15px;
+    margin: 0 0 20px 0;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 2.2em;
+}
+
+.listingContainer ul, .listingContainer ol {
+    margin-bottom: 10px;
+}
+
+.listingContainer li {
+    margin: 5px 0;
+}
+
+/* Task 4: Tables */
+.tableTaskContainer {
+    padding: 30px;
+    font-family: "Courier New", monospace; 
+}
+
+/* Table 1 */
+.fruitTable {
+    margin: 0 auto;
+    border-collapse: separate; 
+    border: 1px solid black;
+}
+
+.fruitTable td, .fruitTable th {
+    border: 1px solid black;
+    padding: 5px 15px;
+    text-align: left;
+}
+
+/* Table 2 */
+.camelTable {
+    width: 90%;
+    margin: 0 auto;
+    border-collapse: collapse; 
+    border: 1px solid #555;
+}
+
+.camelTable th, .camelTable td {
+    border: 1px solid #555;
+    padding: 8px;
+    text-align: center;
+}
+
+.camelHeader {
+    background-color: white;
+    font-size: 1.2em;
+}
+
+.subHeaderRow th {
+    font-weight: bold;
+    padding: 15px 5px;
+}
+
+.camelTable tr th:first-child {
+    text-align: center;
+    width: 200px;
+}
