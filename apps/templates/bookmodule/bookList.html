@@ -12,4 +12,10 @@
     </ul>
     <br>
     <a href="/books/search">Search again</a>
+    <br>
+    <br>
+    {% for obj in books %}
+    ID: {{obj.id}}, Title: {{obj.title}}
+    <hr>
+{% endfor %}
 {% endblock %}

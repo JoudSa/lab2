@@ -12,4 +12,7 @@ path('', views.index, name= "books.index"),
     path('html5/tables/', views.tables_view, name="books.tables"),
 
     path('search/', views.searchView, name='searchView'),
+
+    path('simple/query/', views.simple_query, name='books.simple_query'),
+    path('complex/query/', views.complex_query, name='books.complex_query'),
 ]
