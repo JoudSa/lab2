@@ -1,8 +1,8 @@
 from django.shortcuts import render
 
 from django.http import HttpResponse
-
-from .models import Book
+from django.db.models import Q, Count, Sum, Avg, Max, Min
+from .models import Book,Student, Address
 
 def viewbook(request, bookId):
     # assume that we have the following books somewhere (e.g. database)
@@ -85,3 +85,35 @@ def __getBooksList():
     book2 = {'id':56788765,'title':'Reversing: Secrets of Reverse Engineering', 'author':'E. Eilam'}
     book3 = {'id':43211234, 'title':'The Hundred-Page Machine Learning Book', 'author':'Andriy Burkov'}
     return [book1, book2, book3]
+
+def l8Task1(request):
+    myBook = Book.objects.filter(Q(price__lte = 80))
+    return render(request, 'bookmodule/l8Task1.html', {'books': myBook})
+
+def l8Task2(request):
+    query = Q(edition__gt=3) & (Q(title__icontains='qu') | Q(author__icontains='qu'))
+    myBooks = Book.objects.filter(query)
+    return render(request, 'bookmodule/l8Task2.html', {'books': myBooks})
+
+def l8Task3(request):
+    query = ~Q(edition__gt=3) & (~Q(title__icontains='qu') | ~Q(author__icontains='qu'))
+    myBooks = Book.objects.filter(query)
+    return render(request, 'bookmodule/l8Task3.html', {'books': myBooks})
+
+def l8Task4(request):
+    myBooks = Book.objects.all().order_by('title')
+    return render(request, 'bookmodule/l8Task4.html', {'books': myBooks})
+
+def l8Task5(request):
+    stats = Book.objects.aggregate(
+        totalBooks=Count('id'),
+        totalPrice=Sum('price'),
+        avgPrice=Avg('price'),
+        maxPrice=Max('price'),
+        minPrice=Min('price')
+    )
+    return render(request, 'bookmodule/l8Task5.html', {'stats': stats})
+
+def l8Task7(request):
+    city = Address.objects.annotate(stdNum=Count('student'))
+    return render(request, 'bookmodule/l8Task7.html', {'cities': city})

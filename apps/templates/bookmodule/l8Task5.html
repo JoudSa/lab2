@@ -1,0 +1,32 @@
+{% extends "layouts/base.html" %}
+{% block title %} Lab 8 - Task 5 {% endblock %}
+
+{% block content %}
+    <h2>Book Statistics</h2>
+    <table border="1" style="width: 25%;text-align: left;">
+        <tr>
+            <th style="padding: 8px;">Statistic</th>
+            <th style="padding: 8px;">Value</th>
+        </tr>
+        <tr>
+            <td>Number of Books</td>
+            <td>{{ stats.totalBooks }}</td>
+        </tr>
+        <tr>
+            <td>Total Price</td>
+            <td>{{ stats.totalPrice|floatformat:2 }} SAR</td>
+        </tr>
+        <tr>
+            <td>Average Price</td>
+            <td>{{ stats.avgPrice|floatformat:2 }} SAR</td>
+        </tr>
+        <tr>
+            <td>Maximum Price</td>
+            <td>{{ stats.maxPrice }} SAR</td>
+        </tr>
+        <tr>
+            <td>Minimum Price</td>
+            <td>{{ stats.minPrice }} SAR</td>
+        </tr>
+    </table>
+{% endblock %}

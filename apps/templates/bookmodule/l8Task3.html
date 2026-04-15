@@ -1,0 +1,15 @@
+{% extends "layouts/base.html" %}
+{% block title %}Filter Results{% endblock %}
+
+{% block content %}
+    <h2>Books with NO 'qu' in title or author and the edition is LESS than 3</h2>
+    <ul>
+    {% for book in books %}
+        <li>{{ book.title }} by {{ book.author }} (edition: {{ book.edition}})</li>
+        <hr>
+    {% empty %}
+        <li>No books found matching your criteria.</li>
+    {% endfor %}
+    </ul>
+    <br>
+{% endblock %}

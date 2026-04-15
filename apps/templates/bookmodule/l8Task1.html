@@ -1,0 +1,15 @@
+{% extends "layouts/base.html" %}
+{% block title %}Filter Results{% endblock %}
+
+{% block content %}
+    <h2>Books with Price less than or equal to 80</h2>
+    <ul>
+    {% for book in books %}
+        <li> <strong>{{ book.title }}</strong> ({{ book.price}} SAR)</li>
+        <hr>
+    {% empty %}
+        <li>No books found matching your criteria.</li>
+    {% endfor %}
+    </ul>
+    <br>
+{% endblock %}
