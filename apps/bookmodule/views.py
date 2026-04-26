@@ -1,8 +1,10 @@
+from urllib import request
+
 from django.shortcuts import render
 
 from django.http import HttpResponse
 from django.db.models import Q, Count, Sum, Avg, Max, Min
-from .models import Book,Student, Address
+from .models import Book,Student, Address,Book1, Publisher, Author
 
 def viewbook(request, bookId):
     # assume that we have the following books somewhere (e.g. database)
@@ -117,3 +119,40 @@ def l8Task5(request):
 def l8Task7(request):
     city = Address.objects.annotate(stdNum=Count('student'))
     return render(request, 'bookmodule/l8Task7.html', {'cities': city})
+
+def l9Task1(request):
+    total_stock = Book1.objects.aggregate(Sum('quantity'))['quantity__sum']
+    
+    books = Book1.objects.all()
+    
+    for b in books:
+        if total_stock > 0:
+            b.availability = (b.quantity / total_stock) * 100
+        else:
+            b.availability = 0
+
+    return render(request, 'bookmodule/lab9Task1.html', {'books': books})
+
+def l9Task2(request):
+    publishers = Publisher.objects.annotate(book_count=Count('book1'))
+    return render(request, 'bookmodule/lab9Task2.html', {'publishers': publishers})
+
+def l9Task3(request): 
+    publishers = Publisher.objects.annotate(firstBook=Min('book1__pubdate')).filter(book1__pubdate__isnull=False)
+    return render(request, 'bookmodule/lab9Task3.html', {'publishers': publishers})
+
+def l9Task4(request):
+    stats = Publisher.objects.annotate( 
+        avgPrice=Avg('book1__price'),
+        maxPrice=Max('book1__price'),
+        minPrice=Min('book1__price')).filter(book1__price__isnull=False)
+    
+    return render(request, 'bookmodule/lab9Task4.html', {'stats': stats})
+
+def l9Task5(request):
+    publishers = Publisher.objects.filter(book1__rating__gte=4).annotate(book_count=Count('book1'),total_quantity=Sum('book1__quantity'))
+    return render(request, 'bookmodule/lab9Task5.html', {'publishers': publishers})
+
+def l9Task6(request):
+    publishers = Publisher.objects.filter(Q(book1__price__gt=50)&Q(book1__quantity__lt=5)&Q(book1__quantity__gte=1)).annotate(book_count=Count('book1'))
+    return render(request, 'bookmodule/lab9Task6.html', {'publishers': publishers})

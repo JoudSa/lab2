@@ -1,0 +1,18 @@
+{% extends "layouts/base.html" %}
+{% block title %} Lab 9 - Task 3 {% endblock %}
+
+{% block content %}
+    <h2>Publishers and their First Book Publication Dates</h2>
+    <table border="1">
+        <tr>
+            <th>Publisher Name</th>
+            <th>Date of First Published Book</th>
+        </tr>
+        {% for publisher in publishers %}
+        <tr>
+            <td>{{ publisher.name }}</td>
+            <td>{{ publisher.firstBook|date:"Y-m-d" }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

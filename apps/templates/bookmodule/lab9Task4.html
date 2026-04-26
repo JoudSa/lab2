@@ -1,0 +1,21 @@
+{% extends "layouts/base.html" %}
+{% block title %} Lab 9 - Task 4 {% endblock %}
+{% block content %}
+    <h2>Publisher Price Statistics</h2>
+    <table border="1">
+        <tr>
+            <th>Publisher Name</th>
+            <th>Average Book Price</th>
+            <th>Maximum Book Price</th>
+            <th>Minimum Book Price</th>
+        </tr>
+        {% for publisher in stats %}
+        <tr>
+            <td>{{ publisher.name }}</td>
+            <td>${{ publisher.avgPrice|floatformat:2 }}</td>
+            <td>${{ publisher.maxPrice|floatformat:2 }}</td>
+            <td>${{ publisher.minPrice|floatformat:2 }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

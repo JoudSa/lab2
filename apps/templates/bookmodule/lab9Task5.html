@@ -1,0 +1,30 @@
+{% extends "layouts/base.html" %}
+{% block title %} Lab 9 - Task 5 {% endblock %}
+
+{% block content %}
+    <h2>Publishers with Highly Rated Books</h2>
+    <p>This list shows publishers and the count of books they manage that have a rating of 4 or higher.</p>
+
+    <table border="1" style="width: 60%; border-collapse: collapse; text-align: left;">
+        <thead>
+            <tr style="background-color: #f2f2f2;">
+                <th style="padding: 10px;">Publisher Name</th>
+                <th style="padding: 10px;">Count of High-Rated Books</th>
+                <th style="padding: 10px;">Total Quantity Books</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for publisher in publishers %}
+            <tr>
+                <td style="padding: 8px;">{{ publisher.name }}</td>
+                <td style="padding: 8px;">{{ publisher.book_count }}</td>
+                <td style="padding: 8px;">{{ publisher.total_quantity}}</td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+{% endblock %}

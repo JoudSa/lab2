@@ -22,4 +22,12 @@ path('', views.index, name= "books.index"),
     path('lab8/task4/', views.l8Task4, name='books.l8Task4'),
     path('lab8/task5/', views.l8Task5, name='books.l8Task5'),
     path('lab8/task7/', views.l8Task7, name='books.l8Task7'),
+
+    path('lab9/task1/', views.l9Task1, name='books.l9Task1'),
+    path('lab9/task2/', views.l9Task2, name='books.l9Task2'),
+    path('lab9/task3/', views.l9Task3, name='books.l9Task3'),
+    path('lab9/task4/', views.l9Task4, name='books.l9Task4'),
+    path('lab9/task5/', views.l9Task5, name='books.l9Task5'),
+    path('lab9/task6/', views.l9Task6, name='books.l9Task6'),
+
 ]
