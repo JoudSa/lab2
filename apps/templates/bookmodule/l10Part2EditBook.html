@@ -1,0 +1,11 @@
+{% extends "layouts/base.html" %}
+{% block title %} Lab 10 - Task 2.2 {% endblock %}
+
+{% block content %}
+    <h2>Edit Book</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Edit Book</button>
+    </form>
+{% endblock %}

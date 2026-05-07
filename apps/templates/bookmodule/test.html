@@ -1,0 +1,20 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% block title %} testing {% endblock %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    <label for="name">Name</label>
+    <input type="text" id="name" placehoder="Enter your name">
+    <label>catagory</label>
+    <select>
+        <option value="fiction">fiction</option>
+        <option value="non-fiction">non-fiction</option>
+        <option value="science">science</option>
+    </select>
+    <br>
+    <button type="submit" >submit</button>
+</form>
+
+{% endblock %}

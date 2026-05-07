@@ -30,4 +30,25 @@ path('', views.index, name= "books.index"),
     path('lab9/task5/', views.l9Task5, name='books.l9Task5'),
     path('lab9/task6/', views.l9Task6, name='books.l9Task6'),
 
+    path('lab10_part1/listbooks/', views.l10Part1ListBooks, name='books.l10Part1ListBooks'),
+    path('lab10_part1/addbook/', views.l10Part1AddBook, name='books.l10P1AddBook'),
+    path('lab10_part1/eiditbook/<int:bookId>/', views.l10Part1EditBook, name='books.l10P1EditBook'),
+    path('lab10_part1/deletebook/<int:bookId>/', views.l10P1DeleteBook, name='books.l10P1DeleteBook'),
+
+    path('lab10_part2/listbooks/', views.l10Part2ListBooks, name='books.l10Part2ListBooks'),
+    path('lab10_part2/addbook/', views.l10Part2AddBook, name='books.l10P2AddBook'),
+    path('lab10_part2/eiditbook/<int:bookId>/', views.l10Part2EditBook, name='books.l10P2EditBook'),
+    path('lab10_part2/deletebook/<int:bookId>/', views.l10P2DeleteBook, name='books.l10P2DeleteBook'),
+
+    path('lab11/add_student', views.lab11_addStudent, name='lab11_addStudent'),
+    path('lab11/list_students', views.lab11_list_students, name='lab11_list_students'),
+    path('lab11/update_student/<int:id>', views.lab11_update_student, name='lab11_update_student'),
+    path('lab11/delete_student/<int:id>', views.lab11_delete_student, name='lab11_delete_student'),
+
+    path('lab11/task2_list', views.lab11_task2_list, name='lab11_task2_list'),
+    path('lab11/task2_add', views.lab11_task2_add_student, name='lab11_task2_add'),
+
+    path('lab11/upload_photo', views.lab11_upload_photo, name='lab11_upload_photo'),
+    path('lab11/gallery', views.lab11_gallery, name='lab11_gallery'),
+
 ]

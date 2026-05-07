@@ -1,0 +1,29 @@
+{% extends "layouts/base.html" %}
+{% block title %} Lab 10 - Task 2.1 {% endblock %}
+
+{% block content %}
+    <h2>Books List</h2>
+    <a href="{% url 'books.l10P2AddBook' %}" style="padding: 10px; background: rgb(1, 114, 1);color: antiquewhite;">Add New Book</a><br><br>
+    <table border="1" cellpadding="5" cellspacing="0">
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Edition</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+        {% for book in books %}
+        <tr>
+            <td>{{ book.title }}</td>
+            <td>{{ book.author }}</td>
+            <td>{{ book.edition }}</td>
+            <td>${{ book.price }}</td>
+            <td>
+                <a href="{% url 'books.l10P2EditBook' book.id %}" style="padding: 5px; background: rgb(12, 46, 86);color: antiquewhite;">Edit</a>
+                <a href="{% url 'books.l10P2DeleteBook' book.id %}" style="padding: 5px; background: rgb(110, 1, 1);color: antiquewhite;">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

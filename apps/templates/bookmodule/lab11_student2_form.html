@@ -1,0 +1,23 @@
+{% extends "layouts/base.html" %}
+{% block title %}Student Registration2{% endblock %}
+{% block content %}
+    <h2>Task 2: Many-to-Many Registration</h2>
+    <p>Select all cities that apply to this student.</p>
+
+    <form method="POST">
+        {% csrf_token %}
+        
+        <div style="margin-bottom: 15px;">
+            {{ form.as_p }}
+        </div>
+
+        <button type="submit" style="padding: 10px 20px; background-color: #007bff; color: white; cursor: pointer;">
+            Save Student & Addresses
+        </button>
+        
+        <a href="{% url 'lab11_task2_list' %}" style="margin-left: 10px; color: #666;">Cancel</a>
+    </form>
+
+    <hr>
+    <small>Note: Addresses are displayed as checkboxes because of the <strong>CheckboxSelectMultiple</strong> widget in your forms.py.</small>
+{% endblock %}

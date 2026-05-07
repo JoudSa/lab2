@@ -1,10 +1,12 @@
 from urllib import request
 
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
 from django.http import HttpResponse
 from django.db.models import Q, Count, Sum, Avg, Max, Min
-from .models import Book,Student, Address,Book1, Publisher, Author
+from .models import Book,Student, Address,Book1, Publisher, Author, Student2,Address2, NaturePhoto
+from .forms import BookForm, StudentForm, Student2Form, NaturePhotoForm
+
 
 def viewbook(request, bookId):
     # assume that we have the following books somewhere (e.g. database)
@@ -156,3 +158,154 @@ def l9Task5(request):
 def l9Task6(request):
     publishers = Publisher.objects.filter(Q(book1__price__gt=50)&Q(book1__quantity__lt=5)&Q(book1__quantity__gte=1)).annotate(book_count=Count('book1'))
     return render(request, 'bookmodule/lab9Task6.html', {'publishers': publishers})
+
+
+def l10Part1ListBooks(request):
+    books = Book.objects.all()
+    return render(request, 'bookmodule/l10P1ListBooks.html', {'books': books})
+
+def l10Part1AddBook(request):
+    if request.method == "POST":
+        title = request.POST.get('title')
+        price = float(request.POST.get('price'))
+        author = int(request.POST.get('author')) 
+        edition = int(request.POST.get('edition'))       
+        new_book = Book(title=title, price=price, author=author, edition=edition)
+        new_book.save()
+        
+        return render(request, 'bookmodule/l10P1AddBook.html', {'message': 'Book added successfully!'})
+    
+    return render(request, 'bookmodule/l10P1AddBook.html')
+
+def l10Part1EditBook(request, bookId):
+    book = Book.objects.get(id=bookId)
+    
+    if request.method == "POST":
+        book.title = request.POST.get('title')
+        book.price = float(request.POST.get('price'))
+        book.author = int(request.POST.get('author')) 
+        book.edition = int(request.POST.get('edition'))       
+        book.save()
+        
+        return render(request, 'bookmodule/l10P1EditBook.html', {'book': book, 'message': 'Book updated successfully!'})
+    
+    return render(request, 'bookmodule/l10P1EditBook.html', {'book': book})
+
+def l10P1DeleteBook(request, bookId):
+    book = Book.objects.get(id=bookId)
+    
+    if request.method == "POST":
+        book.delete()
+        return render(request, 'bookmodule/l10P1DeleteBook.html', {'message': 'Book deleted successfully!'})
+    
+    return render(request, 'bookmodule/l10P1DeleteBook.html', {'book': book})
+
+def l10Part2ListBooks(request):
+    books = Book.objects.all()
+    return render(request, 'bookmodule/l10P2ListBooks.html', {'books': books})
+
+def l10Part2AddBook(request):
+    if request.method == "POST":
+        form = BookForm(request.POST)
+        if form.is_valid(): 
+            form.save() 
+            return redirect('books.l10Part2ListBooks')
+    else:
+        form = BookForm()
+    
+    return render(request, 'bookmodule/l10Part2AddBook.html', {'form': form}) 
+
+def l10Part2EditBook(request, bookId):
+    book = Book.objects.get(id=bookId)
+    
+    if request.method == "POST":
+        form = BookForm(request.POST, instance=book)
+        if form.is_valid():
+            form.save()
+            return redirect('books.l10Part2ListBooks')
+    else:
+        form = BookForm(instance=book)
+    
+    return render(request, 'bookmodule/l10Part2EditBook.html', {'form': form, 'book': book})
+
+def l10P2DeleteBook(request, bookId):
+    book = Book.objects.get(id=bookId)
+    
+    if request.method == "POST":
+        book.delete()
+        return redirect('books.l10Part2ListBooks')
+    
+    return render(request, 'bookmodule/l10Part2DeleteBook.html', {'book': book})   
+
+def lab11_addStudent(request):
+    if request.method == 'POST':
+        form = StudentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('lab11_addStudent')
+    else:
+        form = StudentForm()
+    return render(request, 'bookmodule/lab11StudentForm.html', {'form': form})
+def lab11_list_students(request):
+    students = Student.objects.all()
+    return render(request, 'bookmodule/lab11_list_students.html', {'students': students})
+
+def lab11_update_student(request, id):
+    student = Student.objects.get(id=id)
+
+    if request.method == 'POST':
+        form = StudentForm(request.POST, instance=student)
+        if form.is_valid():
+            form.save()
+            return redirect('lab11_list_students')
+    else:
+        form = StudentForm(instance=student)
+        
+    return render(request, 'bookmodule/lab11StudentForm.html', {'form': form})
+
+def lab11_delete_student(request, id):
+    student = Student.objects.get(id=id)
+    student.delete()
+    return redirect('lab11_list_students')
+
+
+def lab11_task2_add_student(request):
+    if request.method == 'POST':
+        form = Student2Form(request.POST) 
+        if form.is_valid():
+            form.save() 
+            return redirect('lab11_task2_list')
+    else:
+        form = Student2Form() 
+    return render(request, 'bookmodule/lab11_student2_form.html', {'form': form})
+
+def lab11_task2_list(request):
+    students = Student2.objects.all()
+    return render(request, 'bookmodule/lab11_task2_list.html', {'students': students})
+
+from .forms import NaturePhotoForm
+
+def lab11_upload_photo(request):
+    if request.method == 'POST':
+        form = NaturePhotoForm(request.POST, request.FILES) 
+        if form.is_valid():
+            form.save()
+            return redirect('lab11_gallery')
+    else:
+        form = NaturePhotoForm()
+    return render(request, 'bookmodule/lab11_upload_form.html', {'form': form})
+
+
+def lab11_upload_photo(request):
+    if request.method == 'POST':
+        form = NaturePhotoForm(request.POST, request.FILES) 
+        if form.is_valid():
+            form.save()
+            return redirect('lab11_gallery')
+    else:
+        form = NaturePhotoForm()
+    return render(request, 'bookmodule/lab11_upload_form.html', {'form': form})
+
+def lab11_gallery(request):
+    photos = NaturePhoto.objects.all()
+    return render(request, 'bookmodule/lab11_gallery.html', {'photos': photos})

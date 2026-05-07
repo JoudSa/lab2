@@ -1,0 +1,23 @@
+{% extends "layouts/base.html" %}
+{% block title %} Lab 10 - Task 1.2 {% endblock %}
+
+{% block content %}
+    <h2>Add New Book</h2>
+    <form method="post">
+        {% csrf_token %}
+        <label for="title">Title:</label><br>
+        <input type="text" id="title" name="title" required><br><br>
+        
+        <label for="author">Author:</label><br>
+        <input type="text" id="author" name="author" required><br><br>
+        
+        <label for="edition">Edition:</label><br>
+        <input type="number" id="edition" name="edition" required><br><br>
+        
+        <label for="price">Price:</label><br>
+        <input type="number" id="price" name="price" step="0.01" required><br><br>
+
+        <button type="submit" style="padding: 10px; background: rgb(1, 114, 1);color: antiquewhite;">Add Book</button>
+    </form>
+
+{% endblock %}

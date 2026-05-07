@@ -1,0 +1,24 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+    <h2>Task 2: Many-to-Many Directory</h2>
+    <a href="{% url 'lab11_task2_add' %}" style="color: blue;">+ Add Student with Many Addresses</a>
+    <br><br>
+    <table border="1" style="width: 100%;">
+        <tr>
+            <th>Student Name</th>
+            <th>Registered Cities</th>
+        </tr>
+        {% for s in students %}
+        <tr>
+            <td>{{ s.name }}</td>
+            <td>
+                {% for addr in s.addresses.all %}
+                    {{ addr.city }}{% if not forloop.last %}, {% endif %}
+                {% empty %}
+                    No addresses on file.
+                {% endfor %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

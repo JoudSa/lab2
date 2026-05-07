@@ -1,0 +1,13 @@
+{% extends "layouts/base.html" %}
+{% block title %} Lab 10 - Task 1.4 {% endblock %}
+
+{% block content %}
+    <h2>Delete Book</h2>
+    <p>Are you sure you want to <b>delete</b> the book "{{ book.title }}" by {{ book.author }}?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" style="padding: 10px; background: rgb(191, 0, 0);color: antiquewhite;">Yes, Delete</button>
+        <a href="{% url 'books.l10Part1ListBooks' %}" style="padding: 10px; background: rgb(1, 114, 1);color: antiquewhite;">No, Cancel</a>
+    </form>
+
+{% endblock %}

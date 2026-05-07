@@ -1,0 +1,25 @@
+{% extends "layouts/base.html" %}
+{% block title %}Student List{% endblock %}
+{% block content %}
+    <h2>Student Directory</h2>
+    <a href="{% url 'lab11_addStudent' %}" style="color: blue;">+ Register New Student</a>
+    <br><br>
+    <table border="1" style="width: 100%; border-collapse: collapse;">
+        <tr style="background-color: #f2f2f2;">
+            <th>Name</th>
+            <th>Age</th>
+            <th>Address (City)</th>
+            <th>Actions</th>
+        </tr>
+        {% for s in students %}
+        <tr>
+            <td>{{ s.name }}</td>
+            <td>{{ s.age }}</td>
+            <td>{{ s.address.city }}</td> <td>
+                <a href="{% url 'lab11_update_student' s.id %}">Update</a> | 
+                <a href="{% url 'lab11_delete_student' s.id %}" style="color: red;">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

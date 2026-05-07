@@ -18,6 +18,21 @@ class Student(models.Model):
     address = models.ForeignKey(Address, on_delete=models.CASCADE)
 
 
+class Address2(models.Model):
+    city = models.CharField(max_length=100)
+    def __str__(self): return self.city
+
+class Student2(models.Model):
+    name = models.CharField(max_length=100)
+    addresses = models.ManyToManyField(Address2)
+
+class NaturePhoto(models.Model):
+    title = models.CharField(max_length=100)
+    # Images will be uploaded to a folder named 'nature_uploads'
+    image = models.ImageField(upload_to='nature_uploads/') 
+    
+    def __str__(self): return self.title
+    
 class Publisher(models.Model):
   name = models.CharField(max_length=200)
   location = models.CharField(max_length=300)

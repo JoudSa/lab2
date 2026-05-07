@@ -86,7 +86,7 @@ mark {
 /* Table 1 */
 .fruitTable {
     margin: 0 auto;
-    border-collapse: separate; 
+    border-collapse: collapse; 
     border: 1px solid black;
 }
 
@@ -95,6 +95,19 @@ mark {
     padding: 5px 15px;
     text-align: left;
 }
+
+tr:hover{
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+    background-color: #60875c;
+}
+
+tr:hover {
+    background-color: #32472f;
+}
+
 
 /* Table 2 */
 .camelTable {
