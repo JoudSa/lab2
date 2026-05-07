@@ -49,6 +49,4 @@ path('', views.index, name= "books.index"),
     path('lab11/task2_add', views.lab11_task2_add_student, name='lab11_task2_add'),
 
     path('lab11/upload_photo', views.lab11_upload_photo, name='lab11_upload_photo'),
-    path('lab11/gallery', views.lab11_gallery, name='lab11_gallery'),
-
 ]

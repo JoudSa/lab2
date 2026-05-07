@@ -301,11 +301,6 @@ def lab11_upload_photo(request):
         form = NaturePhotoForm(request.POST, request.FILES) 
         if form.is_valid():
             form.save()
-            return redirect('lab11_gallery')
     else:
         form = NaturePhotoForm()
     return render(request, 'bookmodule/lab11_upload_form.html', {'form': form})
-
-def lab11_gallery(request):
-    photos = NaturePhoto.objects.all()
-    return render(request, 'bookmodule/lab11_gallery.html', {'photos': photos})
