@@ -10,15 +10,75 @@
   <meta charset="UTF-8">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="{% static 'styles.css' %}"> <!-- include css file -->
- 
+  <style>
+    /* 1. Dark Mode Variables */
+    :root {
+      --bg-color: #121212;      /* Deep black/grey background */
+      --text-color: #e0e0e0;    /* Soft white for readability */
+      --nav-bg: #1e1e1e;        /* Slightly lighter grey for the nav area */
+      --link-color: #bb86fc;    /* Soft purple for links */
+      --border-color: #333333;
+    }
+
+    /* 2. Applying the Styles Globally */
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      margin: 0;
+      padding: 20px;
+      line-height: 1.6;
+    }
+
+    nav {
+      background-color: var(--nav-bg);
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      margin-top: 20px;
+    }
+
+    a {
+      color: var(--link-color);
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* 3. Adjusting Message Colors for Dark Mode */
+    .success { color: #81c784 !important; } /* Soft Green */
+    .error, .danger { color: #e57373 !important; } /* Soft Red */
+  </style>
   {% block stylesheets %}{% endblock stylesheets %}
 </head>
 <body>
     
     {% include "includes/header.html" %}
- 
+
+     {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li class="{{ message.tags }}" style="color: {% if message.tags == 'success' %}green{% else %}red{% endif %};">
+                    {{ message }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    
     {% block content %} {% endblock content %}
- 
+<nav>
+    <br>
+    {% if user.is_authenticated %}
+        <h3>Hello, {{ user.username }}</h3> | 
+        <a href="{% url 'logout' %}">Logout</a>
+    {% else %}
+        <a href="{% url 'login' %}">Login</a> | 
+        <a href="{% url 'register' %}">Register</a>
+    {% endif %}
+    <br>
+</nav>
     {% include "includes/footer.html" %}
 
 </body>

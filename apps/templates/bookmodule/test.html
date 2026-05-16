@@ -1,20 +1,30 @@
-{% extends "layouts/base.html" %}
-{% load static %}
-{% block title %} testing {% endblock %}
-
-{% block content %}
-<form method="post">
-    {% csrf_token %}
-    <label for="name">Name</label>
-    <input type="text" id="name" placehoder="Enter your name">
-    <label>catagory</label>
-    <select>
-        <option value="fiction">fiction</option>
-        <option value="non-fiction">non-fiction</option>
-        <option value="science">science</option>
-    </select>
-    <br>
-    <button type="submit" >submit</button>
-</form>
-
+{% extends "emarket/base.html" %} {% block content %}
+<h2>Search Results for: "{{ query }}"</h2>
+<section>
+    <h3>Matching Categories</h3>
+    <table border="1"> <tr>
+            <th>Category Name</th>
+            <th>Number of Products</th>
+        </tr>
+        {% for cat in categories %}
+        <tr>
+            <td>{{ cat.catName }}</td>
+            <td>{{ cat.product_count }}</td> </tr>
+        {% empty %}
+        <tr><td colspan="2">No categories found.</td></tr>
+        {% endfor %}
+    </table>
+</section>
+<section>
+    <h3>Matching Suppliers</h3>
+    <ul> {% for supp in suppliers %}
+            <li>
+                <strong>{{ supp.suppName }}</strong> ({{ supp.Location }}) 
+                — {{ supp.product_count }} products listed. 
+            </li>
+        {% empty %}
+            <li>No suppliers found.</li>
+        {% endfor %}
+    </ul>
+</section>
 {% endblock %}

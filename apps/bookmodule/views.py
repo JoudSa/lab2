@@ -1,12 +1,14 @@
 from urllib import request
 
 from django.shortcuts import redirect, render
-
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
 from django.http import HttpResponse
 from django.db.models import Q, Count, Sum, Avg, Max, Min
 from .models import Book,Student, Address,Book1, Publisher, Author, Student2,Address2, NaturePhoto
 from .forms import BookForm, StudentForm, Student2Form, NaturePhotoForm
 
+from django.contrib.auth.decorators import login_required
 
 def viewbook(request, bookId):
     # assume that we have the following books somewhere (e.g. database)
@@ -237,6 +239,12 @@ def l10P2DeleteBook(request, bookId):
     
     return render(request, 'bookmodule/l10Part2DeleteBook.html', {'book': book})   
 
+@login_required(login_url="/users/login")
+def lab11_list_students(request):
+    students = Student.objects.all()
+    return render(request, 'bookmodule/lab11_list_students.html', {'students': students})
+
+@login_required(login_url="/users/login")
 def lab11_addStudent(request):
     if request.method == 'POST':
         form = StudentForm(request.POST)
@@ -246,10 +254,8 @@ def lab11_addStudent(request):
     else:
         form = StudentForm()
     return render(request, 'bookmodule/lab11StudentForm.html', {'form': form})
-def lab11_list_students(request):
-    students = Student.objects.all()
-    return render(request, 'bookmodule/lab11_list_students.html', {'students': students})
 
+@login_required(login_url="/users/login")
 def lab11_update_student(request, id):
     student = Student.objects.get(id=id)
 
@@ -263,12 +269,13 @@ def lab11_update_student(request, id):
         
     return render(request, 'bookmodule/lab11StudentForm.html', {'form': form})
 
+@login_required(login_url="/users/login")
 def lab11_delete_student(request, id):
     student = Student.objects.get(id=id)
     student.delete()
     return redirect('lab11_list_students')
 
-
+@login_required(login_url="/users/login")
 def lab11_task2_add_student(request):
     if request.method == 'POST':
         form = Student2Form(request.POST) 
@@ -279,23 +286,14 @@ def lab11_task2_add_student(request):
         form = Student2Form() 
     return render(request, 'bookmodule/lab11_student2_form.html', {'form': form})
 
+@login_required(login_url="/users/login")
 def lab11_task2_list(request):
     students = Student2.objects.all()
     return render(request, 'bookmodule/lab11_task2_list.html', {'students': students})
 
 from .forms import NaturePhotoForm
 
-def lab11_upload_photo(request):
-    if request.method == 'POST':
-        form = NaturePhotoForm(request.POST, request.FILES) 
-        if form.is_valid():
-            form.save()
-            return redirect('lab11_gallery')
-    else:
-        form = NaturePhotoForm()
-    return render(request, 'bookmodule/lab11_upload_form.html', {'form': form})
-
-
+@login_required(login_url="/users/login")
 def lab11_upload_photo(request):
     if request.method == 'POST':
         form = NaturePhotoForm(request.POST, request.FILES) 
